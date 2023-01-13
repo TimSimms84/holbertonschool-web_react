@@ -1,5 +1,6 @@
 import App from './App';
 import { shallow } from 'enzyme';
+import React from 'react';
 
 describe('<App />', () => {
   it('Tests that App renders without crashing', () => {

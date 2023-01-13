@@ -1,5 +1,6 @@
 import Notifications from './Notifications';
 import { shallow } from 'enzyme';
+import React from 'react';
 
 describe('notification', () => {
   it('renders without crashing', () => {
