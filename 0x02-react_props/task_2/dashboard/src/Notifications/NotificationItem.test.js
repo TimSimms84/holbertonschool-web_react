@@ -1,5 +1,5 @@
 import React from 'react';
-import NotificationItem from './Notifications';
+import NotificationItem from './NotificationItem';
 import Notifications from './Notifications';
 import { shallow } from 'enzyme';
 
