@@ -10,11 +10,13 @@ import Footer from '../Footer/Footer';
 import PropTypes from "prop-types";
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
 
 class App extends Component {
 
-  
+
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown);
   }
@@ -52,7 +54,15 @@ class App extends Component {
             <Header />
           </header>
           <div className='App-body'>
-            {isLoggedIn ? <CourseList listCourses={listCourses} /> : < Login />}
+            {isLoggedIn ?
+              <BodySectionWithMarginBottom title='Course list'>
+                <CourseList listCourses={listCourses} />
+              </BodySectionWithMarginBottom>
+              :
+              <BodySectionWithMarginBottom title='Log in to continue'>
+                < Login />
+              </BodySectionWithMarginBottom>
+              }
           </div>
           <footer className='App-footer'>
             <Footer />
