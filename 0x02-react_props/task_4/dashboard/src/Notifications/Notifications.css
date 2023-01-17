@@ -1,16 +1,17 @@
-:root {
-	--primar-color: #E11D3F;
+.notification-menu {
+	padding: 7px;
+	float: right;
 }
-
 .Notifications {
-	border: 1px dashed var(--primar-color);
-	padding: 1rem;
+    border: thin dashed #E0354B;
+    padding: 7px;
+    float: right;
 }
 
-[data-priority="default"] {
+li[data-priority="default"] {
 	color: blue;
 }
 
-[data-priority="urgent"] {
+li[data-priority="urgent"] {
 	color: red;
 }
