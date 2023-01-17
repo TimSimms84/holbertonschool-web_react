@@ -17,6 +17,13 @@ describe('notification', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
+  console.log = jest.fn();
+
+  
+
+  
+
+
   // renders NotificationItem component for each element in the list
   it('renders NotificationItem component for each element in the list', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} />);
@@ -74,4 +81,12 @@ describe('notification', () => {
     expect(wrapper.find('NotificationItem').length).toBe(3);
   });
 
+  // when calling the function markAsRead on an instance of the component, the spy is being called with the right message
+  it('when calling the function markAsRead on an instance of the component, the spy is being called with the right message', () => {
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} displayDrawer={true} />);
+    const instance = wrapper.instance();
+    const spy = jest.spyOn(instance, 'markAsRead');
+    instance.markAsRead(1);
+    expect(spy).toHaveBeenCalledWith(1);
+  });
 });

@@ -14,6 +14,7 @@ import { getLatestNotification } from '../utils/utils';
 
 class App extends Component {
 
+  
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown);
   }

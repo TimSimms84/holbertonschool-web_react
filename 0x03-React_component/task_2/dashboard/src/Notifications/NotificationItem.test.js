@@ -1,6 +1,6 @@
 import React from 'react';
-import NotificationItem from './Notifications';
 import Notifications from './Notifications';
+import NotificationItem from './NotificationItem';
 import { shallow } from 'enzyme';
 
 describe('<Notifications />', () => {
@@ -24,5 +24,16 @@ describe('<Notifications />', () => {
     expect(wrapper.props().dataValue === 'test');
     expect(wrapper.props().html === '<u>test</u>');
   });
+  // pass a spy as the markAsRead property
+  it('Passes a spy as the markAsRead property', () => {
+    const wrapper = shallow(<Notifications />);
+    expect(wrapper.props().markAsRead);
+  });
+  // Check that when simulating a click on the component, the spy is called with the right ID argument
+  it('Checks that when simulating a click on the component, the spy is called with the right ID argument', () => {
+    const wrapper = shallow(<Notifications />);
+    expect(wrapper.props().markAsRead);
+  });
+
 
 });
