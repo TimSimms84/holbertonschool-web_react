@@ -50,7 +50,7 @@ describe('<App />', () => {
 
 describe('<App /> with isLoggedIn', () => {
 
-  const logout = jest.fn(() => console.log('logout running'));
+  const logout = jest.fn();
   const alert = jest.spyOn(window, 'alert');
 
   it('an alert and calls the function logout when ctrl-h is pressed', () => {
