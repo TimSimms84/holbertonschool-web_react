@@ -3,9 +3,10 @@
 	float: right;
 }
 .Notifications {
-    border: thin dashed #E0354B;
+	border: thin dashed #E0354B;
     padding: 7px;
-    float: right;
+	margin: 7px;
+	min-width: 20rem;
 }
 
 li[data-priority="default"] {

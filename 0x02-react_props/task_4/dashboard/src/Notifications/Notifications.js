@@ -15,7 +15,7 @@ function Notifications({ displayDrawer }) {
           <ul>
             <NotificationItem type='default' value='New course available' />
             <NotificationItem type='urgent' value='New resume available' />
-            <NotificationItem type='urgent' html={{_html: getLatestNotification()}} />
+            <NotificationItem type='urgent' html={{ __html: getLatestNotification()}} />
           </ul>
           <button
             style={{
@@ -41,7 +41,7 @@ Notifications.propTypes = {
 };
 
 Notifications.defaultProps = {
-  displayDrawer: false,
+  displayDrawer: true,
 };
 
 export default Notifications;
