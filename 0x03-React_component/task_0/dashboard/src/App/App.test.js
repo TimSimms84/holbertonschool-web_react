@@ -1,7 +1,11 @@
 import App from './App';
 import { shallow } from 'enzyme';
 import React from 'react';
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import Notifications from '../Notifications/Notifications';
+import CourseList from '../CourseList/CourseList';
 
 describe('<App />', () => {
   it('Tests that App renders without crashing', () => {
@@ -37,7 +41,30 @@ describe('<App />', () => {
     const wrapper = shallow(<App isLoggedIn={false} />);
     expect(wrapper.find('CourseList').exists()).toBe(false);
   });
- 
+  it('test that App renders with Login component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} displayDrawer={true} />);
+    const element = wrapper.find(Login);
+    expect(element.exists()).toBe(false);
+  });
+
+  it('test that App renders with Notifications component', () => {
+    const wrapper = shallow(<App isLoggedIn={false} displayDrawer={true} />);
+    const element = wrapper.find(Notifications);
+    expect(element.exists()).toBe(true);
+  });
+
+
+  it('test that App renders with Footer component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} displayDrawer={true} />);
+    const element = wrapper.find(Footer);
+    expect(element.exists()).toBe(true);
+  });
+
+  it('test that App renders with CourseList component', () => {
+    const wrapper = shallow(<App isLoggedIn={false} displayDrawer={true} />);
+    const element = wrapper.find(CourseList);
+    expect(element.exists()).toBe(false);
+  });
 });
 
 describe('<App /> with isLoggedIn', () => {
@@ -51,4 +78,26 @@ describe('<App /> with isLoggedIn', () => {
     const wrapper = shallow(<App isLoggedIn={true} />);
     expect(wrapper.find('CourseList').exists()).toBe(true);
   });
+  it('test that App renders with Header component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} displayDrawer={true} />);
+    const element = wrapper.find(Header);
+    expect(element.exists()).toBe(true);
+  });
+  it('test that App renders with Login component', () => {
+    const wrapper = shallow(<App isLoggedIn={false} displayDrawer={true} />);
+    const element = wrapper.find(Login);
+    expect(element.exists()).toBe(true);
+  });
+  
+  it('test that App renders with Notifications component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} displayDrawer={true} />);
+    const element = wrapper.find(Notifications);
+    expect(element.exists()).toBe(true);
+  });
+  it('test that App renders with CourseList component', () => {
+    const wrapper = shallow(<App isLoggedIn={true} displayDrawer={true} />);
+    const element = wrapper.find(CourseList);
+    expect(element.exists()).toBe(true);
+  });
+
 });
