@@ -17,7 +17,7 @@ function Login() {
         </form>
       </div>
     </React.Fragment>
-  );
+  )
 }
 
 export default Login;
