@@ -1,30 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { markAsRead } from './Notifications'
 
-
-
-const NotificationItem = ({ type, html, value, markAsRead }) => {
-  if (value) {
-    return ( <li onClick={markAsRead} data-priority={type}>{value}</li> );
+export default class NotificationsItem extends React.Component {
+  render () {
+    if (this.props.value) {
+      return ( <li data-priority={this.props.type} onClick={this.props.markAsRead}>{this.props.value}</li> );
+    }
+    return ( <li data-priority={this.props.type} dangerouslySetInnerHTML={this.props.html} onClick={this.props.markAsRead}/> );
   }
-  return ( <li onClick={markAsRead} data-priority={type} dangerouslySetInnerHTML={html} /> );
 }
 
-
-NotificationItem.propTypes = { 
-  type: PropTypes.string,
+NotificationsItem.propTypes = {
+  id: PropTypes.number,
   html: PropTypes.shape({ __html: PropTypes.string }),
+  type: PropTypes.string.isRequired,
   value: PropTypes.string,
-  markAsRead: PropTypes.func.isRequired,
-};
+  markAsRead: PropTypes.func,
+}
 
-NotificationItem.defaultProps = {
+NotificationsItem.defaultProps = {
+  html: { __html: '' },
   type: 'default',
-  html: {},
   value: '',
-  markAsRead: () => {},  
-};
-  
-export default NotificationItem;
-
+  markAsRead: () => console.log(`markAsRead missing`),
+}

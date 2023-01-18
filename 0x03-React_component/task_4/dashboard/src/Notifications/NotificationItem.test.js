@@ -1,39 +1,36 @@
 import React from 'react';
-import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { shallow } from 'enzyme';
+import { assert } from 'chai';
 
-describe('<Notifications />', () => {
-  // test that it renders without crashing
-  it('Tests that Notifications renders without crashing', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.exists()).toBe(true);
+global.console.log = jest.fn()
+
+describe('NotificationItem Renders', () => {
+  const out = jest.spyOn(console, "log");
+  const NI = shallow(<NotificationItem />);
+  const typeValue = shallow(<NotificationItem value='test' markAsRead={() => console.log('Test 2')} />);
+  const typeHtml = shallow(<NotificationItem type='urgent' html={{ __html: '<u>test</u>' }} markAsRead={() => console.log('Test 3')} />);
+
+  it('without crashing', () => {
+    assert.equal(NI.length, 1);
+    assert.equal(typeValue.length, 1);
+    assert.equal(typeHtml.length, 1);
   });
 
-  it('renders with props', () => {
-    const wrapper = shallow(<NotificationItem type="default" value="test" />);
-    expect(wrapper.props().dataPriority === 'default');
-    expect(wrapper.props().dataValue === 'test');
+  it('with correct data properties & html', () => {
+    assert.equal(typeValue.props()['data-priority'], 'default');
+    assert.equal(typeValue.text(), 'test');
+    assert.equal(typeHtml.props()['data-priority'], 'urgent');
+    assert.equal(typeHtml.text(), '');
+    assert.equal(typeHtml.props().dangerouslySetInnerHTML.__html, '<u>test</u>');
   });
 
-  it('Renders with props', () => {
-    const wrapper = shallow(
-      <NotificationItem type="urgent" html={{ __html: '<u>test</u>' }} />
-    );
-    expect(wrapper.props().dataPriority === 'urgent');
-    expect(wrapper.props().dataValue === 'test');
-    expect(wrapper.props().html === '<u>test</u>');
+  it('with onClick function that logs correct text', () => {
+    NI.props().onClick();
+    expect(out).toHaveBeenCalledWith('markAsRead missing');
+    typeValue.props().onClick();
+    expect(out).toHaveBeenCalledWith('Test 2');
+    typeHtml.props().onClick();
+    expect(out).toHaveBeenCalledWith('Test 3');
   });
-  // pass a spy as the markAsRead property
-  it('Passes a spy as the markAsRead property', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.props().markAsRead);
-  });
-  // Check that when simulating a click on the component, the spy is called with the right ID argument
-  it('Checks that when simulating a click on the component, the spy is called with the right ID argument', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.props().markAsRead);
-  });
-
-
 });

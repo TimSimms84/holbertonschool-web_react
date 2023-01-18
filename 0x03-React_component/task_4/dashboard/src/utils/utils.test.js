@@ -1,19 +1,29 @@
-// import React from "react";
-import { getFullYear, getFooterCopy, getLatestNotification } from "./utils";
+import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
+import { assert } from 'chai';
 
-// test to check getFullYear returns correct year
-test('getFullYear returns correct year', () => {
-  expect(getFullYear()).toBe(2023);
-});
+describe('Utils', () => {
+  describe('getFullYear', () => {
+    it('returns the current year', () => {
+      assert.equal(getFullYear(), new Date().getFullYear());
+    });
+  });
 
-test('getFooter if false', () => {
-  expect(getFooterCopy()).toBe('Holberton School main dashboard');
-});
+  describe('getFooterCopy', () => {
+    it('returns the right string when passing true', () => {
+      assert.equal(getFooterCopy(true), 'Holberton School');
+    });
 
-test('getFooter if true', () => {
-	expect(getFooterCopy(true)).toBe('Holberton School');
-});
+    it('returns the right string when passing false', () => {
+      assert.equal(getFooterCopy(false), 'Holberton School main dashboard');
+    });
+  });
 
-test('getLatestNotification', () => {
-  expect(getLatestNotification()).toBe('<strong>Urgent requirement</strong> - complete by EOD');
+  describe('getLatestNotification', () => {
+    it('returns the right string', () => {
+      assert.equal(
+        getLatestNotification(),
+        '<strong>Urgent requirement</strong> - complete by EOD'
+      );
+    });
+  });
 });
