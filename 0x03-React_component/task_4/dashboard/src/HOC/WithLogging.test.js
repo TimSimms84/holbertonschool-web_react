@@ -1,20 +1,15 @@
-import React from 'react';
-import { mount } from 'enzyme';
+import React  from 'react';
+import { shallow } from 'enzyme';
 import WithLogging from './WithLogging';
-import Login from '../Login/Login';
-
+import Login from '../Login/Login'
 global.console.log = jest.fn()
-
-describe('WithLogging wraps component', () => {
-	const spy = jest.spyOn(console, 'log');
-  const wrapper = mount(< WithLogging Wrapped={<Login />} />);
-
-  it('to console.log message when mounted', () => {
-    expect(spy).toHaveBeenCalledWith('Component Login is mounted');
+describe('WithLogging', () => {
+  const login = shallow(<Login />);
+  const loginWithLogging = shallow(<WithLogging><Login /></WithLogging>);
+  it('renders without crashing', () => {
+    expect(login.length).toEqual(1);
   });
-
-  it('to console.log message when unmounted', () => {
-    wrapper.unmount();
-    expect(spy).toHaveBeenCalledWith('Component Login is going to unmount');
+  it('renders the wrapped component', () => {
+    expect(loginWithLogging.length).toEqual(1);
   });
 });

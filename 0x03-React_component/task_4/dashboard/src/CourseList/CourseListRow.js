@@ -1,28 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-export default class CourseListRow extends React.Component {
-  render() {
-    if (this.props.isHeader) {
-      if (this.props.textSecondCell) {
-        return (
-          <tr>
-            <th>{this.props.textFirstCell}</th>
-            <th>{this.props.textSecondCell}</th>
-          </tr>
-        );
-      } else {
-        return ( <tr><th colSpan="2">{this.props.textFirstCell}</th></tr> );
-      }
+function CourseListRow({ isHeader, textFirstCell, textSecondCell }) {
+  if (isHeader) {
+    if (textSecondCell) {
+      return (
+        <tr>
+          <th>{textFirstCell}</th>
+          <th>{textSecondCell}</th>
+        </tr>
+      );
     } else {
       return (
         <tr>
-          <td>{this.props.textFirstCell}</td>
-          <td>{this.props.textSecondCell}</td>
+          <th colSpan={2}>{textFirstCell}</th>
         </tr>
       );
     }
   }
+  return (
+    <tr>
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell}</td>
+    </tr>
+  );
 }
 
 CourseListRow.propTypes = {
@@ -33,5 +34,8 @@ CourseListRow.propTypes = {
 
 CourseListRow.defaultProps = {
   isHeader: false,
-  textSecondCell: null,
+  textFirstCell: "",
+  textSecondCell: "",
 };
+
+export default CourseListRow;

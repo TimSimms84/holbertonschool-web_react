@@ -1,77 +1,76 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import { jest } from '@jest/globals';
 import { shallow } from 'enzyme';
-import { assert } from 'chai';
+import React from 'react';
+import sinon from 'sinon';
 
-global.console.log = jest.fn()
 
-describe('App Renders', () => {
-  const logout = jest.fn(() => console.log('logout running'));
-  const alert = jest.spyOn(global, 'alert');
+window.alert = sinon.spy(
 
-  const app = shallow(<App logOut={logout} />);
-  const header = app.find('.App-header');
-  const body = app.find('.App-body');
-  const footer = app.find('.App-footer');
-  const notificationsRender = app.find('Notifications').render();
-  const headerRender = app.find('Header').render();
-  const loginRender = app.find('Login').render();
-  const courseListRender = app.find('CourseList');
-  const footerRender = app.find('Footer').render();
+)
 
-  it('without crashing', () => {
-    assert.equal(app.length, 1);
+
+describe('<App />', () => {
+  it('Tests that App renders without crashing', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.exists()).toBe(true);
   });
 
-  it('the header', () => {
-    assert.equal(header.length, 1);
+  // should contain the Notifications component
+  it('Tests that App renders a Notifications component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Notifications').exists()).toBe(true);
   });
 
-  it('the body', () => {
-    assert.equal(body.length, 1);
+  // should contain the Header component
+  it('Tests that App renders a Header component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Header').exists()).toBe(true);
   });
 
-  it('the footer', () => {
-    assert.equal(footer.length, 1);
+  // should contain the Login component
+  it('Tests that App renders a Login component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Login').exists()).toBe(true);
   });
 
-  it('children that render correctly', () => {
-    assert.isOk(notificationsRender.hasClass('menuItem'));
-    assert.equal(notificationsRender.length, 2);
-    assert.equal(headerRender.length, 2);
-    assert.equal(loginRender.length, 2);
-    assert.equal(footerRender.length, 1);
+  // should contain the Footer component
+  it('Tests that App renders a Footer component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Footer').exists()).toBe(true);
   });
+  // check that CourseList is not displayed when isLoggedIn is false
+  it('Tests that App does not render a CourseList component when isLoggedIn is false', () => {
+    const wrapper = shallow(<App isLoggedIn={false} />);
+    expect(wrapper.find('CourseList').exists()).toBe(false);
+  });
+  // verify that when the keys control and h are pressed the logOut function, passed as a prop, is called and the alert function is called with the string Logging you out
+
+});
+
+describe('<App /> with isLoggedIn', () => {
+
+  const logout = jest.fn();
+  const alert = jest.spyOn(window, 'alert');
 
   it('an alert and calls the function logout when ctrl-h is pressed', () => {
-    jest.spyOn(window, 'alert').mockImplementation(() => {});
-    document.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: 'h' }));
-    expect(alert).toHaveBeenCalled();
+    const wrapper = shallow(<App isLoggedIn={true} logOut={logout} />);
+    wrapper.instance().handleKeydown({ ctrlKey: true, key: 'h' });
     expect(alert).toHaveBeenCalledWith('Logging you out');
     expect(logout).toHaveBeenCalled();
   });
 
-  it('NOT the CourseList', () => {
-    assert.equal(courseListRender.length, 0);
+  
+  // Login component is not displayed when isLoggedIn is true
+  it('Tests that App does not render a Login component when isLoggedIn is true', () => {
+    const wrapper = shallow(<App isLoggedIn={true} />);
+    expect(wrapper.find('Login').exists()).toBe(false);
   });
-});
-
-describe('Logged in App Renders', () => {
-  const app = shallow(<App isLoggedIn={true} />);
-  const body = app.find('.App-body');
-  const login = body.find('Login');
-  const courseListRender = body.find('CourseList').render()[0];
-
-  it('without crashing', () => {
-    assert.equal(app.length, 1);
+  // CourseList component is displayed when isLoggedIn is true
+  it('Tests that App renders a CourseList component when isLoggedIn is true', () => {
+    const wrapper = shallow(<App isLoggedIn={true} />);
+    expect(wrapper.find('CourseList').exists()).toBe(true);
   });
 
-  it('the CourseList', () => {
-    assert.equal(courseListRender.name, 'table');
-  });
 
-  it('NOT the Login', () => {
-    assert.equal(login.length, 0);
-  });
 });

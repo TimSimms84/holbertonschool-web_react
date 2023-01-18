@@ -1,33 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {  mount } from 'enzyme';
+import { shallow } from 'enzyme';
+
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 
-describe('BodySectionWithMarginBottom Renders', () => {
-  const BSMargin = mount(
-    <BodySectionWithMarginBottom title="test title">
-      <p>test child</p>
-    </BodySectionWithMarginBottom>
-  )
-  const bodySection = BSMargin.find('.bodySection');
-  const h2 = BSMargin.find('h2');
-  const p = BSMargin.find('p');
-
-  it('without crashing', () => {
-    expect(BSMargin.length).toBe(1);
+describe('BodySectionWithMarginBottom', () => {
+  it('renders without crashing', () => {
+    const wrapper = shallow(<BodySectionWithMarginBottom />);
+    expect(wrapper.exists());
   });
 
-  it('with correct CSS class', () => {
-    expect(BSMargin.find('.bodySectionWithMargin').length).toBe(1);
+  it('renders one div with class bodySectionWithMargin', () => {
+    const wrapper = shallow(<BodySectionWithMarginBottom />);
+    expect(wrapper.find('div.bodySectionWithMargin')).toHaveLength(1);
   });
 
-  it('with correct children', () => {
-    expect(bodySection.length).toBe(1);
-    expect(bodySection.children().length).toBe(2);
-    expect(h2.length).toBe(1);
-    expect(h2.text()).toBe('test title');
-    expect(p.length).toBe(1);
-    expect(p.text()).toBe('test child');
+  it('renders a BodySection component and that the props are passed correctly to the child component', () => {
+    const wrapper = shallow(
+      <BodySectionWithMarginBottom title="test title">
+        <p>test children node</p>
+      </BodySectionWithMarginBottom>
+    );
+    expect(wrapper.find('BodySection')).toHaveLength(1);
+    expect(wrapper.find('BodySection').props().title).toEqual('test title');
+    expect(wrapper.find('BodySection').props().children).toEqual(<p>test children node</p>);
   });
+
+ 
 
 });

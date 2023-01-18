@@ -1,26 +1,18 @@
+.notification-menu {
+	padding: 7px;
+	float: right;
+}
 .Notifications {
-	border: 1px red dashed;
-	padding: 1rem;
-	margin: 1rem;
+	border: thin dashed #E0354B;
+    padding: 7px;
+	margin: 7px;
+	min-width: 20rem;
 }
 
-[data-priority="default"] {
+li[data-priority="default"] {
 	color: blue;
 }
 
-[data-priority="urgent"] {
+li[data-priority="urgent"] {
 	color: red;
-}
-
-th {
-    border-bottom: 2px solid gray;
-}
-
-tr:nth-child(n + 2) th {
-    text-align: left;
-}
-
-table {
-    border: 1px solid gray;
-    width: 100%;
 }
