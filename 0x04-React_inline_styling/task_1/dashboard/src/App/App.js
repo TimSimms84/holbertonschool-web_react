@@ -1,6 +1,8 @@
 import logo from '../assets/holberton-logo.jpg';
-import './App.css'
+// import './App.css';
+
 import React, { Component } from 'react';
+import { getFullYear, getFooterCopy } from '../utils/utils';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
 import Login from '../Login/Login';
@@ -8,8 +10,9 @@ import Footer from '../Footer/Footer';
 import PropTypes from "prop-types";
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
+import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
-import { StyleSheet, css } from 'aphrodite';
+import { css, StyleSheet } from 'aphrodite';
 
 
 class App extends Component {
@@ -44,40 +47,51 @@ class App extends Component {
       { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
     ];
 
+    const style = StyleSheet.create({
+      body: {
+        // padding: '0px 10px',
+        margin: '0px',
+        // padding: '0px',
+        height: '500px',
+        padding: '2% 3%',
+        // minWidth: '100%',
+      }
+    });
+
     return (
       <>
         <Notifications listNotifications={listNotifications} />
-        <div className={css(styles.App)}>
-          <div className="App">
-            <header className="App-header">
-              <Header />
-            </header>
-            <div className='App-body'>
-              {isLoggedIn ?
-                <BodySectionWithMarginBottom title='Course list'>
-                  <CourseList listCourses={listCourses} />
-                </BodySectionWithMarginBottom>
-                :
-                <BodySectionWithMarginBottom title='Log in to continue'>
-                  < Login />
-                </BodySectionWithMarginBottom>
+        <div className="App">
+          <header className="App-header">
+            <Header />
+          </header>
+          <div className={`App-body ${css(style.body)}`}>
+            
+            {isLoggedIn ?
+              <BodySectionWithMarginBottom title='Course list'>
+                <CourseList listCourses={listCourses} />
+              </BodySectionWithMarginBottom>
+              :
+              <BodySectionWithMarginBottom title='Log in to continue'>
+                < Login />
+              </BodySectionWithMarginBottom>
               }
-            </div>
-            <footer className='App-footer'>
-              <Footer />
-            </footer>
+            <BodySection title='News from the School'>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </BodySection>
           </div>
+          <footer className='App-footer'>
+            <Footer />
+          </footer>
         </div>
       </>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  App: {
-    margin: '0',
-  },
-});
+
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
