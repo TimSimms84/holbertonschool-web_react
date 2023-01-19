@@ -19,10 +19,6 @@ describe('notification', () => {
 
   console.log = jest.fn();
 
-  
-
-  
-
 
   // renders NotificationItem component for each element in the list
   it('renders NotificationItem component for each element in the list', () => {
@@ -88,5 +84,28 @@ describe('notification', () => {
     const spy = jest.spyOn(instance, 'markAsRead');
     instance.markAsRead(1);
     expect(spy).toHaveBeenCalledWith(1);
+  });
+
+  // verify that when updating the props of the component with the same list, the component doesn’t rerender
+  it('verify that when updating the props of the component with the same list, the component doesn’t rerender', () => {
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} displayDrawer={true} />);
+    const shouldComponentUpdate = jest.spyOn(
+      Notifications.prototype,
+      'shouldComponentUpdate'
+    );
+    wrapper.setProps({ listNotifications });
+    expect(shouldComponentUpdate).toHaveBeenCalled();
+    expect(shouldComponentUpdate).toHaveReturnedWith(false);
+  });
+  // verify that when updating the props of the component with a longer list, the component does rerender
+  it('verify that when updating the props of the component with a longer list, the component does rerender', () => {
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} displayDrawer={true} />);
+    const shouldComponentUpdate = jest.spyOn(
+      Notifications.prototype,
+      'shouldComponentUpdate'
+    );
+    wrapper.setProps({ listNotifications: [...listNotifications, { id: 4, type: 'urgent', value: 'New resume available' }] });
+    expect(shouldComponentUpdate).toHaveBeenCalled();
+    expect(shouldComponentUpdate).toHaveReturnedWith(true);
   });
 });
