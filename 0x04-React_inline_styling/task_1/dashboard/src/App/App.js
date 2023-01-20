@@ -1,8 +1,5 @@
 import logo from '../assets/holberton-logo.jpg';
-// import './App.css';
-
 import React, { Component } from 'react';
-import { getFullYear, getFooterCopy } from '../utils/utils';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
 import Login from '../Login/Login';
@@ -55,7 +52,16 @@ class App extends Component {
         height: '500px',
         padding: '2% 3%',
         // minWidth: '100%',
-      }
+      },
+      footer: {
+        textAlign: 'center',
+        fontStyle: 'italic',
+        borderTop: 'solid #e0354b',
+        bottom: '0',
+        position: 'fixed',
+        width: '100%',
+
+      },
     });
 
     return (
@@ -82,7 +88,7 @@ class App extends Component {
               </p>
             </BodySection>
           </div>
-          <footer className='App-footer'>
+          <footer className={`App-footer ${css(style.footer)}`}>
             <Footer />
           </footer>
         </div>

@@ -1,15 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import { markAsRead } from './Notifications'
-
-
-
-// const NotificationItem = ({ type, html, value, markAsRead }) => {
-//   if (value) {
-//     return ( <li onClick={markAsRead} data-priority={type}>{value}</li> );
-//   }
-//   return ( <li onClick={markAsRead} data-priority={type} dangerouslySetInnerHTML={html} /> );
-// }
 
 class NotificationItem extends PureComponent {
   constructor(props) {

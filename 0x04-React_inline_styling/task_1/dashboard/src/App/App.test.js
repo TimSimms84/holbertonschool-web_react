@@ -3,8 +3,9 @@ import { jest } from '@jest/globals';
 import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
-// import 
+import { StyleSheetTestUtils } from 'aphrodite';
 
+StyleSheetTestUtils.suppressStyleInjection();
 
 window.alert = sinon.spy(
 

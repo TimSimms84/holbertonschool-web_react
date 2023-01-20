@@ -1,6 +1,9 @@
 import Header from './Header';
 import { shallow } from 'enzyme';
 import React from 'react';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('<Header />', () => {
   it('Tests that Header renders without crashing', () => {

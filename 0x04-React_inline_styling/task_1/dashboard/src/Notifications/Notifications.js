@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
-import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 import NotificationItemShape from './NotificationItemShape';
+import { StyleSheet, css } from 'aphrodite';
 
 
 
@@ -26,13 +25,31 @@ class Notifications extends Component {
   }
 
   render() {
+    const style = StyleSheet.create({
+      menuItem: {
+        marginRight: '1rem',
+      },
+      noteBox: {
+        border: '1px red dashed',
+        padding: '1rem',
+        margin: '1rem',
+      },
+      notes: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'end',
+        position: 'absolute',
+        right: 0,
+      },
+    });
+
     const displayDrawer = this.props.displayDrawer;
     const listNotifications = this.props.listNotifications;
     return (
-      <div className='notification-menu'>
-        <div className='menuItem'>Your notifications</div>
+      <div className={`Notfication-menu ${css(style.notes)}`}>
+        <div className={`menuItem ${css(style.menuItem)}`}>Your notifications</div>
         {displayDrawer && (
-          <div className='Notifications'>
+          <div className={`Notifications ${css(style.noteBox)}`}>
             {listNotifications.length ? (
               <p>Here is the list of notifications</p>
             ) : (

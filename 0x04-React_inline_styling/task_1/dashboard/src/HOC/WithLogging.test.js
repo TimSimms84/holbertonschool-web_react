@@ -2,6 +2,10 @@ import React  from 'react';
 import { shallow } from 'enzyme';
 import WithLogging from './WithLogging';
 import Login from '../Login/Login'
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
+
 global.console.log = jest.fn()
 describe('WithLogging', () => {
   const login = shallow(<Login />);

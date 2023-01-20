@@ -45,5 +45,6 @@ CourseListRow.propTypes = {
 
 CourseListRow.defaultProps = {
   isHeader: false,
+  textFirstCell: '',
   textSecondCell: null,
 };

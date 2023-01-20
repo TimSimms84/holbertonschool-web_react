@@ -1,6 +1,9 @@
 import React from "react";
 import CourseListRow from "./CourseListRow";
 import { shallow } from "enzyme";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe("<CourseListRow />", () => {
   it("renders without crashing", () => {
@@ -15,7 +18,7 @@ describe("<CourseListRow />", () => {
     );
     expect(wrapper.find('th').length).toEqual(1);
     expect(wrapper.find('th').text()).toEqual('test');
-    expect(wrapper.find('th').prop('colSpan')).toEqual(2);
+    expect(wrapper.find('th').prop('colSpan')).toEqual("2");
   });
 
   it('CourseListRow with isHeader true and textSecondCell', () => {

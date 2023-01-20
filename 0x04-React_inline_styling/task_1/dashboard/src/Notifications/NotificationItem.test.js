@@ -2,6 +2,9 @@ import React from 'react';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('<Notifications />', () => {
   // test that it renders without crashing
