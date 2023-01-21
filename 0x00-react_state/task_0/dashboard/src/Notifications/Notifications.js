@@ -79,6 +79,7 @@ class Notifications extends Component {
     return false;
   }
 
+  // handleDisplayDrawer *: *\( *\)\ =>\  \{\}
   render() {
     return (
       <div className={css(styles.fullNotifications)}>
@@ -146,8 +147,8 @@ Notifications.propTypes = {
 Notifications.defaultProps = {
   listNotifications: [],
   displayDrawer: true,
-  handleHideDrawer: () => console.log('handleHideDrawer missing'),
-  handleDisplayDrawer: () => console.log('handleDisplayDrawer missing'),
+  handleHideDrawer: () => {},
+  handleDisplayDrawer: () => {},
 };
 
 export default Notifications;
