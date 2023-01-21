@@ -61,6 +61,7 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
+    this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this);
   }
 
   markAsRead(id) {

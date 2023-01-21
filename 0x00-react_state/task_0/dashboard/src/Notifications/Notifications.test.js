@@ -89,4 +89,28 @@ describe('Test suite for Notifications', () => {
     const element = wrapper.find('p');
     expect(element.length).toBe(1);
   });
+  // verify that clicking on the menu item calls handleDisplayDrawer, use setState and instance
+  it('test to verify that clicking on the menu item calls handleDisplayDrawer', () => {
+    const handleDisplayDrawer = jest.fn();
+    const wrapper = shallow(
+      <Notifications handleDisplayDrawer={handleDisplayDrawer} />
+    );
+    wrapper.update();
+    wrapper.find('p').first().simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+  // verify that clicking on the close calls handleHideDrawer, use setState and instance
+  it('test to verify that clicking on the close calls handleHideDrawer', () => {
+    const handleDisplayDrawer = jest.fn();
+    const wrapper = shallow(
+      <Notifications handleDisplayDrawer={handleDisplayDrawer} />
+    );
+    wrapper.update();
+    wrapper.find('p').first().simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+    wrapper.find('#close-icon').simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+    
+
+  });
 });

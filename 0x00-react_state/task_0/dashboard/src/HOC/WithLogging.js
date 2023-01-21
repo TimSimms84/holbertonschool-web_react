@@ -5,6 +5,13 @@ const WithLogging = (WrappedComponent) => {
     WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   class Logs extends Component {
+
+    constructor(props) {
+      super(props);
+      this.componentDidMount = this.componentDidMount.bind(this);
+      this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    }
+
     componentDidMount() {
       console.log(`Component ${name} is mounted`);
     }
