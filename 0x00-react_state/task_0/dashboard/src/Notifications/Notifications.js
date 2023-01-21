@@ -80,7 +80,7 @@ class Notifications extends Component {
   }
 
   render() {
-    const { handleDisplayDrawer } = this.props;
+    const { handleDisplayDrawer, handleHideDrawer } = this.props;
     return (
       <div className={css(styles.fullNotifications)}>
         <div className={css(styles.menuItem)}>
@@ -120,7 +120,7 @@ class Notifications extends Component {
             </div>
             <button
               className={css(styles.closeButton)}
-              onClick={this.props.handleHideDrawer}
+              onClick = { handleHideDrawer }
               aria-label={'Close'}
             >
               <img
