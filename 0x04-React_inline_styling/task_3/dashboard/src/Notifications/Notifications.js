@@ -26,78 +26,46 @@ class Notifications extends Component {
 
   render() {
     const style = StyleSheet.create({
-      close_btn: {
-        border: 0,
-        background: 'white',
-        position: 'absolute',
-        right: '25px',
-        top: '45px',
-        '@media (max-width: 900px)': {
-          top: '20px',
-        }
-      },
       menuItem: {
         marginRight: '1rem',
-        '@media (max-width: 900px)': {
-          display: 'none',
-        }
       },
       noteBox: {
         border: '1px red dashed',
         padding: '1rem',
         margin: '1rem',
+        // if displayDrawer is true 900 Media Query
         '@media (max-width: 900px)': {
           border: 'none',
-          padding: 0,
-          margin: 0,
-          height: '100%',
-          width: '100%',
+          padding: '0',
+          margin: '0',
+          width: this.displayDrawer ? '0vw' : '100vw',
+          height: this.displayDrawer ? '0vw' : '100vw',
+          position: this.displayDrawer ? 'absolute' : 'absolute',
           backgroundColor: 'white',
         },
       },
-      wrapper: {
+      notes: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'end',
         position: 'absolute',
-        padding: 0,
-        margin: 0,
         right: 0,
-        '@media (max-width: 900px)': {
-          height: '100%',
-          width: '100%',
-          backgroundColor: 'white',
-        },
       },
-      ul: {
-        '@media (max-width: 900px)': {
-          margin: 0,
-          padding: 0,
-        },
-      }
     });
-
 
     const displayDrawer = this.props.displayDrawer;
     const listNotifications = this.props.listNotifications;
     return (
-      <div className={`Notfication-menu ${css(style.wrapper)}`}>
+      <div className={`Notfication-menu ${css(style.notes)}`}>
         <div className={`menuItem ${css(style.menuItem)}`}>Your notifications</div>
         {displayDrawer && (
           <div className={`Notifications ${css(style.noteBox)}`}>
             {listNotifications.length ? (
-              <ul className={css(style.ul)}>
-              {/* enject list of notifications */}
-              {this.props.listNotifications.map((note) =>
-                note.html ?
-                  <NotificationItem key={note.id} id={note.id} type={note.type} html={note.html} />
-                : <NotificationItem key={note.id} id={note.id} type={note.type} value={note.value} />
-              )}
-            </ul>
+              <p>Here is the list of notifications</p>
             ) : (
               <p>No new notification for now</p>
             )}
-            {/* {listNotifications ? (
+            {listNotifications ? (
               listNotifications.map((notif) => (
                 <NotificationItem
                   key={notif.id}
@@ -109,7 +77,7 @@ class Notifications extends Component {
               ))
             ) : (
               <tr>No course available yet</tr>
-            )} */}
+            )}
 
             <button
               style={{
