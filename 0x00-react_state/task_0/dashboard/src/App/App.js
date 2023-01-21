@@ -82,9 +82,9 @@ class App extends Component {
       { id: 2, type: 'urgent', value: 'New resume available' },
       { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
     ];
-    const handleHideDrawer = this.handleHideDrawer;
-    const handleDisplayDrawer = this.handleDisplayDrawer;
-    const displayDrawer = this.state.displayDrawer;
+    const { handleHideDrawer } = this.handleHideDrawer;
+    const { handleDisplayDrawer } = this.handleDisplayDrawer;
+    const { displayDrawer } = this.state;
 
     return (
       <div className={css(styles.body)}>
