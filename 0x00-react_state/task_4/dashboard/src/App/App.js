@@ -8,7 +8,6 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
-// import WithLogging from '../HOC/WithLogging';
 import { getLatestNotification } from '../utils/utils';
 import AppContext from './AppContext';
 
@@ -39,6 +38,8 @@ export default class App extends React.Component {
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.login = this.login.bind(this);
     this.state.logout = this.state.logout.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
   }
 
   handleDisplayDrawer() {
