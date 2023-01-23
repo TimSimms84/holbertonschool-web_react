@@ -47,7 +47,7 @@ describe('Header Renders', () => {
 
   it('#logoutSection once logged in with correct email', () => {
     assert.equal(loggedIn.find('#logoutSection').length, 1);
-    assert.equal(loggedIn.find('#logoutSection').text(), 'Welcome a@b\xa0(logout)');
+    assert.equal(loggedIn.find('#logoutSection').text(), 'Welcome a@b (logout)');
   });
 
   it('logout button with correct function', () => {

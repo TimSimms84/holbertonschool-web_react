@@ -20,7 +20,6 @@ export default function Header() {
     },
     logout: {
       position: 'absolute',
-      border: null,
       bottom: 0,
       right: 0,
       marginRight: '1rem',

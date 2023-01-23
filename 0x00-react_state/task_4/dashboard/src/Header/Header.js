@@ -20,7 +20,6 @@ export default function Header() {
     },
     logout: {
       position: 'absolute',
-      border: null,
       bottom: 0,
       right: 0,
       marginRight: '1rem',
@@ -34,7 +33,7 @@ export default function Header() {
       {
         context.user.isLoggedIn ?
           <p id='logoutSection' className={css(style.logout)} >
-            Welcome {context.user.email}&nbsp;<a onClick={context.logout} href='#'>(logout)</a>
+            Welcome {context.user.email} <a onClick={context.logout} href='#'>(logout)</a>
           </p>
         : null
       }
