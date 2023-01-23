@@ -1,112 +1,84 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import { css, StyleSheet } from 'aphrodite';
 
-
-const styles = StyleSheet.create({
-  login: {
-    marginTop: '3rem',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    '@media (min-width: 900px)': {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-  },
-  input: {
-    fontSize: '1rem',
-    border: '1px solid lightgrey',
-    ':focus': {
-      outline: 'none',
-      border: '1px solid #e11d3f',
-      padding: '0.5rem',
-    },
-    '@media (min-width: 900px)': {
-      margin: '0 1rem',
-    },
-  },
-  button: {
-    border: '1px solid lightgrey',
-    borderRadius: '0.5rem',
-    width: '2.5rem',
-    ':hover': {
-      outline: 'none',
-      border: '1px solid #e11d3f',
-    },
-    '@media (min-width: 900px)': {
-      padding: '0.5rem .5rem',
-    },
-  },
-});
-
-export default function Login({ logIn }) {
+export default function Login({ login }) {
+  // could have used context here
   const [state, setState] = React.useState({
     email: '',
     password: '',
     enableSubmit: false,
   });
-  
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    logIn(state.email, state.password);
-  };
 
-  const handleChangeEmail = (e) => {
-    if (state.password !== '' && state.email !== '') state.enableSubmit = true;
-    setState({ ...state, email: e.target.value });
-  };
+  const style =  StyleSheet.create({
+    button: {
+      '@media (max-width: 900px)': {
+        width: '60px',
+        float: 'right',
+      },
+    },
+    emailPass: {
+      marginLeft: '10px',
+    },
+    form: {
+      '@media (max-width: 900px)': {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+    },
+    label: {
+      marginRight: '25px',
+      '@media (max-width: 900px)': {
+        marginBottom: '10px',
+      },
+    },
+  });
 
-  const handleChangePassword = (e) => {
-    if (state.password !== '' && state.email !== '') state.enableSubmit = true;
-    setState({ ...state, password: e.target.value });
-  };
+  function handleChangeEmail(event) {
+    if (event.target.value && state.password) state.enableSubmit = true
+    else state.enableSubmit = false;
+    setState({ ...state, email: event.target.value });
+  }
+
+  function handleChangePassword(event) {
+    if (state.email && event.target.value) state.enableSubmit = true
+    else state.enableSubmit = false;
+    setState({ ...state, password: event.target.value });
+  }
+
+  function handleLoginSubmit(event) {
+    event.preventDefault();
+    if (state.enableSubmit) {
+      login(state.email, state.password);
+    }
+    else alert('Please enter email and password to proceed');
+  }
 
   return (
-    <div className={css(styles.login)}>
+    <React.Fragment>
       <p>Login to access the full dashboard</p>
-      <form className={css(styles.form)} onSubmit={handleLoginSubmit}>
-        <label htmlFor="email">
-          Email:
+      <form className={css(style.form)} onSubmit={handleLoginSubmit}>
+        <label htmlFor="email" className={css(style.label)} >Email:
           <input
+            className={css(style.emailPass)}
             type="email"
             id="email"
-            value={state.email}
-            placeholder="email"
-            onChange={handleChangeEmail}
-            className={css(styles.input)}
             name="email"
+            value={state.email}
+            onChange={handleChangeEmail}
           />
         </label>
-        <label htmlFor="password">
-          Password:
+        <label htmlFor="password" className={css(style.label)} >Password:
           <input
+            className={css(style.emailPass)}
             type="password"
             id="password"
-            placeholder="password"
+            name="password"
             value={state.password}
             onChange={handleChangePassword}
-            className={css(styles.input)}
-            name="password"
           />
         </label>
-        <button
-          disabled={!(state.email !== '' && state.password !== '')}
-          className={css(styles.button)}
-          type="submit"
-        >
-          OK
-        </button>
+        <input type="submit" value="OK" className={css(style.button)} />
       </form>
-    </div>
-  );
+    </React.Fragment>
+  )
 }
-
-Login.propTypes = {
-  logIn: PropTypes.func,
-};
-
-Login.defaultProps = {
-  logIn: () => {},
-};

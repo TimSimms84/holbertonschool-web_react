@@ -1,38 +1,46 @@
 import React from 'react';
-import NotificationItem from './Notifications';
-import Notifications from './Notifications';
+import NotificationItem from './NotificationItem';
 import { shallow } from 'enzyme';
+import { assert } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
 
-StyleSheetTestUtils.suppressStyleInjection();
+global.console.log = jest.fn()
 
-describe('NotificationItem', () => {
-  it('renders without crashing', () => {
-    shallow(<NotificationItem />);
+describe('NotificationItem Renders', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
   });
 
-  it('renders with props', () => {
-    const wrapper = shallow(<NotificationItem type="default" value="test" />);
-    expect(wrapper.props().dataPriority === 'default');
-    expect(wrapper.props().dataValue === 'test');
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  it('Renders with props', () => {
-    const wrapper = shallow(
-      <NotificationItem type="urgent" html={{ __html: '<u>test</u>' }} />
-    );
-    expect(wrapper.props().dataPriority === 'urgent');
-    expect(wrapper.props().dataValue === 'test');
-    expect(wrapper.props().html === '<u>test</u>');
+  const out = jest.spyOn(console, "log");
+  const NI = shallow(<NotificationItem id={1} />);
+  const typeValue = shallow(<NotificationItem id={2} value='test' />);
+  const typeHtml = shallow(<NotificationItem id={3} type='urgent' html={{ __html: '<u>test</u>' }} />);
+
+  it('without crashing', () => {
+    assert.equal(NI.length, 1);
+    assert.equal(typeValue.length, 1);
+    assert.equal(typeHtml.length, 1);
   });
 
-  it('Passes a spy as the markAsRead property', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.props().markAsRead);
+  it('with correct data properties & html', () => {
+    assert.equal(typeValue.props()['data-priority'], 'default');
+    assert.equal(typeValue.text(), 'test');
+    assert.equal(typeHtml.props()['data-priority'], 'urgent');
+    assert.equal(typeHtml.text(), '');
+    assert.equal(typeHtml.props().dangerouslySetInnerHTML.__html, '<u>test</u>');
   });
-  // Check that when simulating a click on the component, the spy is called with the right ID argument
-  it('Checks that when simulating a click on the component, the spy is called with the right ID argument', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.props().markAsRead);
+
+  it('with onClick function that logs correct text', () => {
+    NI.props().onClick();
+    expect(out).toHaveBeenCalledWith('Notification 1 has been marked as read')
+    typeValue.props().onClick();
+    expect(out).toHaveBeenCalledWith('Notification 2 has been marked as read')
+    typeHtml.props().onClick();
+    expect(out).toHaveBeenCalledWith('Notification 3 has been marked as read')
   });
 });

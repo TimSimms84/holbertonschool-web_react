@@ -1,31 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const WithLogging = (WrappedComponent) => {
-  const name =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+export default function WithLogging({Wrapped}) {
+  // console.log(Wrapped)
+  // console.log(Wrapped.props)
+  const wrappedName = Wrapped.type.name ? Wrapped.type.name
+  : Wrapped.type.displayName ? Wrapped.type.displayName
+  : 'Component';
 
-  class Logs extends Component {
-
-    constructor(props) {
-      super(props);
-      this.componentDidMount = this.componentDidMount.bind(this);
-      this.componentWillUnmount = this.componentWillUnmount.bind(this);
-    }
+  class BuildWithLogging extends React.Component {
+    static displayName = `withLogging(${wrappedName})`;
 
     componentDidMount() {
-      console.log(`Component ${name} is mounted`);
+      console.log(`Component ${wrappedName} is mounted`);
     }
-
+  
     componentWillUnmount() {
-      console.log(`Component ${name} is going to unmount`);
+      console.log(`Component ${wrappedName} is going to unmount`);
     }
-
+  
     render() {
-      return <WrappedComponent {...this.props} />;
+      // console.log('in class render', Wrapped.props)
+      return ( Wrapped )
     }
   }
-  Logs.displayName = `WithLogging(${name})`;
-  return Logs;
-};
+  // console.log(BuildWithLogging.displayName)
+  return < BuildWithLogging />;
+}
 
-export default WithLogging;
+WithLogging.propTypes = {
+  Wrapped: PropTypes.node,
+}
+
+WithLogging.defaultProps = {
+  Wrapped: <div name="bonkers">wtf</div>,
+}

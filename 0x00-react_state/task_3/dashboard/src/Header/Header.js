@@ -1,43 +1,43 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
-import logo from '../assets/holberton_logo.jpg';
+import { css, StyleSheet } from 'aphrodite';
+import Holb_Logo from '../assets/Holb_Logo.jpg';
 import AppContext from '../App/AppContext';
 
-const styles = StyleSheet.create({
-  AppHeader: {
-    color: '#e0354b',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  imgSize: {
-    height: '15rem',
-    width: '15rem',
-  },
-  title: {
-    display: 'inline',
-    fontSize: '2rem',
-    marginLeft: '1rem',
-  },
-  logoutSection: {
-    marginLeft: '3rem',
-  },
-});
-
 export default function Header() {
-  const { user, logOut } = React.useContext(AppContext);
+  const context = React.useContext(AppContext);
+
+  const style =  StyleSheet.create({
+    logo: {
+      width: '240px',
+      height: '240px',
+    },
+    header: {
+      display: 'flex',
+      position: 'relative',
+      alignItems: 'center',
+      borderBottom: 'medium solid red',
+      borderBottomColor: 'red',
+    },
+    logout: {
+      position: 'absolute',
+      border: null,
+      bottom: 0,
+      right: 0,
+      marginRight: '1rem',
+    }
+  });
+
   return (
-    <header className={css(styles.AppHeader)}>
-      <img src={logo} className={css(styles.imgSize)} alt="logo" />
-      <h1 className={css(styles.title)}>School dashboard</h1>
-      {user.isLoggedIn ? (
-        <div id='logoutSection' className={css(styles.logoutSection)}>
-          <p>Welcome {user.email}</p>
-          <button className='logOutButton' onClick={logOut}>
-            (logout)
-            </button>
-        </div> ) : (
-        null
-      )}
+    <header className={`App-header ${css(style.header)}`} >
+      <img src={Holb_Logo} className={`App-logo ${css(style.logo)}`} alt="logo" />
+      <h1>School dashboard</h1>
+      {
+        context.user.isLoggedIn ?
+          <p id='logoutSection' className={css(style.logout)} >
+            Welcome {context.user.email}&nbsp;<a onClick={context.logout} href='#'>(logout)</a>
+          </p>
+        : null
+      }
     </header>
-  );
+  )
 }

@@ -5,8 +5,16 @@ import AppContext from '../App/AppContext';
 
 export default function Footer() {
   const { user } = React.useContext(AppContext);
+
+  const style = StyleSheet.create({
+    footer: {
+      textAlign: 'center',
+      borderTop: 'solid red',
+    },
+  });
+
   return (
-    <footer className={`App-footer`}>
+    <div className={`App-footer ${css(style.footer)}`}>
       <p>Copyright {getFullYear()} - {getFooterCopy(0)}</p>
       {
         user.isLoggedIn ?
@@ -15,6 +23,6 @@ export default function Footer() {
           </p>
         : null
       }
-    </footer>
+    </div>
   )
 }

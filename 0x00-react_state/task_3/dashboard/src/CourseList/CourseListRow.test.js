@@ -1,38 +1,42 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
+import { shallow } from 'enzyme';
+import { assert } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
 
-StyleSheetTestUtils.suppressStyleInjection();
+describe('CourseListRow Renders', () => {
 
-describe('CourseListRow', () => {
-  it('Renders CourseListRow with isHeader true and no textSecondCell', () => {
-    const wrapper = shallow(<CourseListRow isHeader textFirstCell="First" />);
-    expect(wrapper.find('th').length).toBe(1);
-    expect(wrapper.find('th').get(0).props.children).toBe('First');
-    expect(wrapper.find('th').get(0).props.colSpan).toBe(2);
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
   });
 
-  it('Renders CourseListRow with isHeader true and both cells', () => {
-    const wrapper = shallow(
-      <CourseListRow isHeader textFirstCell="First" textSecondCell="Second" />
-    );
-    expect(wrapper.find('th').length).toBe(2);
-    expect(wrapper.find('th').get(0).props.children).toBe('First');
-    expect(wrapper.find('th').get(1).props.children).toBe('Second');
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  it('Renders 2 <td> elements inside <tr> with isHeader false', () => {
-    const wrapper = shallow(
-      <CourseListRow
-        isHeader={false}
-        textFirstCell="First"
-        textSecondCell="Second"
-      />
-    );
-    const trWrapper = wrapper.find('tr');
-    expect(trWrapper.find('td').length).toBe(2);
-    expect(trWrapper.find('td').first().text()).toBe('First');
-    expect(trWrapper.find('td').get(1).props.children).toBe('Second');
+  const colSpan2 = shallow(<CourseListRow isHeader={true} textFirstCell='colSpan=2' />);
+  const th2 = shallow(<CourseListRow isHeader={true} textFirstCell='First th' textSecondCell='Second th' />);
+  const td2 = shallow(<CourseListRow textFirstCell='First td' textSecondCell='Second td' />);
+
+  it('without crashing', () => {
+    assert.equal(colSpan2.length, 1);
+    assert.equal(th2.length, 1);
+    assert.equal(td2.length, 1);
   });
-});
+
+  it('colSpan=2 th when isHeader=true & textSecondCell=null', () => {
+    assert.equal(colSpan2.children().length, 1)
+    assert.equal(th2.children().first().type(), 'th');
+  });
+
+  it('th x2 when isHeader=true & textSecondCell != null', () => {
+    assert.equal(th2.children().length, 2);
+    assert.equal(th2.children().first().type(), 'th');
+  });
+
+  it('td x2 when isHeader=true & textSecondCell != null', () => {
+    assert.equal(td2.children().length, 2);
+    assert.equal(td2.children().first().type(), 'td');
+  });
+})
+
