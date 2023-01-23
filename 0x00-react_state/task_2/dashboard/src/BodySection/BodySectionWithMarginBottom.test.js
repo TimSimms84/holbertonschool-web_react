@@ -11,7 +11,6 @@ describe('BodySectionWithMarginBottom', () => {
   it('BodySectionWithMarginBottom renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<BodySectionWithMarginBottom title="test title" />, div);
-    console.log('true');
     ReactDOM.unmountComponentAtNode(div);
   });
 

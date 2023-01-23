@@ -27,7 +27,6 @@ describe('Test suite for Notifications', () => {
   it('tests Notifications renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Notifications />, div);
-    console.log('true');
     ReactDOM.unmountComponentAtNode(div);
   });
 

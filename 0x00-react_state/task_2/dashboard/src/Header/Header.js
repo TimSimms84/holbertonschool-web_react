@@ -32,7 +32,7 @@ export default function Header() {
       {user.isLoggedIn ? (
         <div id='logoutSection' className={css(styles.logoutSection)}>
           <p>Welcome {user.email}</p>
-          <button onClick={logOut}>
+          <button className='logOutButton' onClick={logOut}>
             (logout)
             </button>
         </div> ) : (
