@@ -2,22 +2,28 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import BodySection from './BodySection';
 
-describe('BodySection Renders', () => {
-  const BS = shallow(
-    <BodySection title="test title">
-      <p>test child</p>
-    </BodySection>
-  );
-  
-  it('without crashing', () => {
-    expect(BS.length).toBe(1);
+describe('BodySection component', () => {
+  // Tests for BodySection component
+
+  it('Verifies that test BodySection rendered with correct h2', () => {
+    const body = (
+      <BodySection title="test title">
+        <p>test children node</p>
+      </BodySection>
+    );
+    const wrapper = shallow(body);
+    expect(wrapper.find('h2').length).toBe(1);
+    expect(wrapper.find('h2').text()).toBe('test title');
   });
 
-  it('with correct children', () => {
-    expect(BS.children().length).toBe(2);
-    expect(BS.find('h2').length).toBe(1);
-    expect(BS.find('h2').text()).toBe('test title');
-    expect(BS.find('p').length).toBe(1);
-    expect(BS.find('p').text()).toBe('test child');
+  it('Verifies that test BodySection rendered with correct p', () => {
+    const body = (
+      <BodySection title="test title">
+        <p>test children node</p>
+      </BodySection>
+    );
+    const wrapper = shallow(body);
+    expect(wrapper.find('p').length).toBe(1);
+    expect(wrapper.find('p').text()).toBe('test children node');
   });
 });

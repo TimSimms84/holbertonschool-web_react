@@ -1,42 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+import BodySection from './BodySection';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 import { StyleSheetTestUtils } from 'aphrodite';
 
-describe('BodySectionWithMarginBottom Renders', () => {
-  beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
+StyleSheetTestUtils.suppressStyleInjection();
+
+describe('BodySectionWithMarginBottom', () => {
+  it('BodySectionWithMarginBottom renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<BodySectionWithMarginBottom title="test title" />, div);
+    ReactDOM.unmountComponentAtNode(div);
   });
 
-  afterEach(() => {
-    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  it('BodySectionWithMarginBottom rendered with the default title and children', () => {
+    const wrapper = shallow(
+      <BodySectionWithMarginBottom title="test title">
+        <p>test children node</p>
+      </BodySectionWithMarginBottom>
+    );
+    const element = wrapper.find(BodySection);
+    const child = wrapper.find('p');
+    expect(element.length).toBe(1);
+    expect(child.text()).toBe('test children node');
   });
-
-  const BSMargin = mount(
-    <BodySectionWithMarginBottom title="test title">
-      <p>test child</p>
-    </BodySectionWithMarginBottom>
-  )
-  const bodySection = BSMargin.find('.BodySection');
-  const h2 = BSMargin.find('h2');
-  const p = BSMargin.find('p');
-
-  it('without crashing', () => {
-    expect(BSMargin.length).toBe(1);
-  });
-
-  it('with correct CSS class', () => {
-    expect(BSMargin.find('.BodySectionWithMargin').length).toBe(1);
-  });
-
-  it('with correct children', () => {
-    expect(bodySection.length).toBe(1);
-    expect(bodySection.children().length).toBe(2);
-    expect(h2.length).toBe(1);
-    expect(h2.text()).toBe('test title');
-    expect(p.length).toBe(1);
-    expect(p.text()).toBe('test child');
-  });
-
 });

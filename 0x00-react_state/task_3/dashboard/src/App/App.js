@@ -97,11 +97,15 @@ export default class App extends React.Component {
           display: this.state.displayDrawer ? 'none' : 'block',
         },
       },
-      footer: {
-        textAlign: 'center',
-        borderTop: 'solid red',
-
-      },
+      footer: {	
+        borderTop: '3px #e0354b solid',	
+        position: 'absolute',	
+        bottom: 0,	
+        width: '97.5%',	
+        textAlign: 'center',	
+        fontStyle: 'italic',	
+        width: '100%',
+      },	
     });
 
     return (
