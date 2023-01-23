@@ -14,6 +14,7 @@ import { StyleSheetTestUtils } from 'aphrodite';
 
 StyleSheetTestUtils.suppressStyleInjection();
 
+window.alert = jest.fn();
 
 describe('Test suite for rendering the App component', () => {
   it('test that App renders without crashing', () => {
