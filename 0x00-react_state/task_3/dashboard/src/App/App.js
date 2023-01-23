@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
-import WithLogging from '../HOC/WithLogging';
+// import WithLogging from '../HOC/WithLogging';
 import { getLatestNotification } from '../utils/utils';
 import AppContext from './AppContext';
 
