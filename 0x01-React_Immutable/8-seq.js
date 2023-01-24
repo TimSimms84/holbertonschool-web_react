@@ -10,9 +10,12 @@ export default function printBestStudents(grades) {
   })).toJS());
 }
 
-const grades = [
-  { score: 83, firstName: 'Guillaume', lastName: 'Salva' },
-  { score: 61, firstName: 'James', lastName: 'Bond' },
-];
+const grades = {
+  1: {
+    score: 99,
+    firstName: 'guillaume',
+    lastName: 'salva',
+  }
+};
 
 printBestStudents(grades);
