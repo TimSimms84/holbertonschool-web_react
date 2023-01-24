@@ -9,4 +9,3 @@ export function getListObject(arr) {
 export function addElementToList(list, element) {
   return list.push(element);
 }
-
