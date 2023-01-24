@@ -1,7 +1,7 @@
 #!/usr/bin/node
 import Immutable from 'immutable';
 
-const map = Immutable.Map({
+export const map = Immutable.Map({
   1: 'Liam',
   2: 'Noah',
   3: 'Elijah',
@@ -10,7 +10,7 @@ const map = Immutable.Map({
   6: 'Lucas',
 });
 
-const map2 = map.withMutations((mapItem) => {
+export const map2 = map.withMutations((mapItem) => {
   mapItem.set(2, 'Benjamin').set(4, 'Oliver');
 });
 
