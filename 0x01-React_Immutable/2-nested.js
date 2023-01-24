@@ -1,10 +1,12 @@
 #!/usr/bin/node
 
-import { getIn } from 'immutable';
+// eslint-disable-next-line no-unused-vars
+import Immutable from 'immutable';
 
-export default function accessImmutableObject(obj, path) {
+export default function accessImmutableObject(obj, array) {
+  const myMap = Immutable.fromJS(obj);
   return (
-    getIn(obj, path)
+    myMap.getIn(array)
   );
 }
 
