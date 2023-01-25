@@ -7,7 +7,7 @@ export const selectCourse = (index) => {
   };
 }
 
-export const unselectCourse = (index) => {
+export const unSelectCourse = (index) => {
   return {
     type: UNSELECT_COURSE,
     payload: index,

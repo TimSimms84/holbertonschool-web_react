@@ -19,4 +19,4 @@ describe("courseActionCreators", () => {
     };
     expect(unSelectCourse(index)).toEqual(expectedAction);
   });
-}
+});
