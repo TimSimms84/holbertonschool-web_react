@@ -1,31 +1,29 @@
 #!/usr/bin/node
 // const notifications = require('../notifications.json');
-import notifications from '../notifications.json';
+import notifData from '../notifications.json';
 import { schema, normalize } from 'normalizr';
 
 
 
-export default function getAllNotificationsByUser(userId) {
-  // return a list containing all the context objects from the notifications.json data when the author id is the same as the userId
-  return notifications.filter((notification) => notification.author.id === userId)
-  .map((notification) => notification.context);
 
-}
-
+// define users schema
 const user = new schema.Entity('users');
 
-const messages = new schema.Entity('messages', {}, {
+// set idAttribute in options to guid in messages schema
+const message = new schema.Entity('messages', {}, {
   idAttribute: 'guid',
 });
 
-const notificationSchema = new schema.Entity('notifications', {
+// define notifications schema that ties the other schema into our json data
+const notification = new schema.Entity('notifications', {
   author: user,
-  context: messages,
+  context: message,
 });
 
-export const normalizedData = normalize(notifications, [notificationSchema]);
+export const normalizedData = normalize(notifData, [notification]);
 
-// console.log(normalizedData.entities.users)
-
-// console.log(getAllNotificationsByUser('5debd764a7c57c7839d722e9'))
- 
+export function getAllNotificationsByUser(userId) {
+  return Object.values(normalizedData.entities.notifications)
+    .filter((note) => note.author == userId)
+    .map((note) => normalizedData.entities.messages[note.context]);
+}
