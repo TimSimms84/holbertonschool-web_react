@@ -7,6 +7,8 @@ function markAsRead(index) {
   };
 }
 
+const boundMarkAsRead = (index) => dispatch(markAsRead(index));
+
 function setNotificationFilter(filter) {
   return {
     type: types.SET_TYPE_FILTER,
@@ -14,4 +16,6 @@ function setNotificationFilter(filter) {
   };
 }
 
-export { markAsRead, setNotificationFilter };
+const boundSetNotificationFilter = (filter) => dispatch(setNotificationFilter(filter));
+
+export { markAsRead, setNotificationFilter, boundMarkAsRead, boundSetNotificationFilter };
