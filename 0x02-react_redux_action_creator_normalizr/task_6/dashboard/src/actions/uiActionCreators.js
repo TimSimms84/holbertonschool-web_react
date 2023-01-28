@@ -1,4 +1,5 @@
 import * as types from './uiActionTypes';
+import { bindActionCreators } from 'redux';
 
 export function Login(email, password) {
   return {
@@ -10,15 +11,11 @@ export function Login(email, password) {
   };
 }
 
-export const boundLogin = (email, password) => dispatch(Login(email, password));
-
 export function Logout() {
   return {
     type: types.LOGOUT,
   };
 }
-
-export const boundLogout = () => dispatch(Logout());
 
 export function displayNotificationDrawer() {
   return {
@@ -26,13 +23,18 @@ export function displayNotificationDrawer() {
   };
 }
 
-export const boundDisplayNotificationDrawer = () => dispatch(displayNotificationDrawer());
-
 export function hideNotificationDrawer() {
   return {
     type: types.HIDE_NOTIFICATION_DRAWER,
   };
 }
 
+export const uiActions = {
+  login: Login,
+  logout: Logout,
+  displayNotificationDrawer: displayNotificationDrawer,
+  hideNotificationDrawer: hideNotificationDrawer
+}
 
-export const boundHideNotificationDrawer = () => dispatch(hideNotificationDrawer());
+export const boundUiActions = dispatch => bindActionCreators(uiActions, dispatch);
+

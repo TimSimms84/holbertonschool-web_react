@@ -1,21 +1,25 @@
 import * as types from './notificationActionTypes';
+import { bindActionCreators } from 'redux';
 
-function markAsRead(index) {
+
+export function markAsRead(index) {
   return {
     type: types.MARK_AS_READ,
     index,
   };
 }
 
-const boundMarkAsRead = (index) => dispatch(markAsRead(index));
 
-function setNotificationFilter(filter) {
+export function setNotificationFilter(filter) {
   return {
     type: types.SET_TYPE_FILTER,
     filter,
   };
 }
 
-const boundSetNotificationFilter = (filter) => dispatch(setNotificationFilter(filter));
+export const noteActions = {
+  markAsRead,
+  setNotificationFilter,
+}
 
-export { markAsRead, setNotificationFilter, boundMarkAsRead, boundSetNotificationFilter };
+export const boundNoteActions = dispatch => bindActionCreators(noteActions, dispatch);
