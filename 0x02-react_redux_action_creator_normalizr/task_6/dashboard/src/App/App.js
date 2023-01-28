@@ -100,12 +100,11 @@ export default class App extends React.Component {
       },
       footer: {	
         borderTop: '3px #e0354b solid',	
-        position: 'absolute',	
+        position: 'relative',	
         bottom: 0,	
-        width: '97.5%',	
-        textAlign: 'center',	
         fontStyle: 'italic',	
-        width: '100%',
+        // width: '100%',
+        textAlign: 'center',
       },	
     });
 
