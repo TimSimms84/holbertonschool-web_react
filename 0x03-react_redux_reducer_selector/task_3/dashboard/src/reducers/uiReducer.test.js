@@ -1,13 +1,17 @@
-
 import { StyleSheetTestUtils } from 'aphrodite';
 import uiReducer from './uiReducer';
 import { DISPLAY_NOTIFICATION_DRAWER } from '../actions/uiActionTypes';
 import { initialState } from './uiReducer';
 
-StyleSheetTestUtils.suppressStyleInjection();
-
-
 describe('uiReducere', () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('returns the initial state when no action is passed', () => {
     expect(uiReducer(undefined, {})).toEqual(initialState);
   });
@@ -23,5 +27,4 @@ describe('uiReducere', () => {
     const newState = uiReducer(initialState, action);
     expect(newState.get('isNotificationDrawerVisible')).toBe(true);
   });
-
 });
