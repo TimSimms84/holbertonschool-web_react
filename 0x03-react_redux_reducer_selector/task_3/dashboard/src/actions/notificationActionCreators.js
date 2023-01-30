@@ -17,6 +17,13 @@ export function setNotificationFilter(filter) {
   };
 }
 
+export function fetchNotificationsSuccess(data) {
+  return {
+    type: types.FETCH_NOTIFICATIONS_SUCCESS,
+    data,
+  };
+}
+
 export const noteActions = {
   markAsRead,
   setNotificationFilter,
