@@ -1,10 +1,25 @@
 import notificationReducer, { initialState } from './notificationReducer';
 import { MARK_AS_READ, SET_TYPE_FILTER, NotificationTypeFilters, FETCH_NOTIFICATIONS_SUCCESS } from '../actions/notificationActionTypes';
 
+const mockNotifications = [
+  {
+    id: 1,
+    type: 'default',
+    value: 'New course available',
+  },
+  {
+    id: 2,
+    type: 'urgent',
+    value: 'New resume available',
+  },
+  {
+    id: 3,
+    type: 'urgent',
+    value: 'New data available',
+  },
+];
 
 describe('notificationReducer', () => {
-
-
   it('should return the initial state', () => {
     expect(notificationReducer(undefined, {})).toEqual(initialState);
   });
@@ -39,27 +54,10 @@ describe('notificationReducer', () => {
     };
     expect(notificationReducer(initialState, action)).toEqual(expectedState);
   });
-
   it('should handle FETCH_NOTIFICATIONS_SUCCESS', () => {
     const action = {
       type: FETCH_NOTIFICATIONS_SUCCESS,
-      data: [
-        {
-          id: 1,
-          type: 'default',
-          value: 'New course available',
-        },
-        {
-          id: 2,
-          type: 'urgent',
-          value: 'New resume available',
-        },
-        {
-          id: 3,
-          type: 'urgent',
-          value: 'New data available',
-        },
-      ],
+      data: mockNotifications,
     };
     const expectedState = {
       filter: initialState.filter,
@@ -69,6 +67,5 @@ describe('notificationReducer', () => {
     };
     expect(notificationReducer(initialState, action)).toEqual(expectedState);
   });
-
-
 });
+
