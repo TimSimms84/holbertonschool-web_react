@@ -17,7 +17,7 @@ describe("courseReducer", () => {
 
   it('handles FETCH_COURSE_SUCCESS action correctly', () => {
     const expected = courseReducer(initialState, fetchCourseSuccess(courses));
-    expect(expected).toEqual(courses);
+    expect(expected).toEqual(initialState.merge(courses));
   });
 
   it('handles SELECT_COURSE action correctly', () => {
