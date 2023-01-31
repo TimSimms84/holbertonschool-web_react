@@ -1,6 +1,7 @@
 import courseReducer, { initialState } from "./courseReducer";
 import { SELECT_COURSE, UNSELECT_COURSE } from '../actions/courseActionTypes';
 import { fetchCourseSuccess } from '../actions/courseActionCreators';
+import { coursesNormalizer } from "../schema/courses";
 
 describe("courseReducer", () => {
   
@@ -11,13 +12,13 @@ describe("courseReducer", () => {
   ];
 
   it("returns initial state when called with undefined state and action", () => {
-    const expected = courseReducer(undefined, {});
+    const expected = courseReducer(undefined, { type: "UNKNOWN" });
     expect(expected).toEqual(initialState);
   });
 
   it('handles FETCH_COURSE_SUCCESS action correctly', () => {
     const expected = courseReducer(initialState, fetchCourseSuccess(courses));
-    expect(expected).toEqual(initialState.merge(courses));
+    expect(expected).toEqual(coursesNormalizer(courses));
   });
 
   it('handles SELECT_COURSE action correctly', () => {
