@@ -1,5 +1,4 @@
 #!/usr/bin/node
-// const notifications = require('../notifications.json');
 import notifData from '../notifications.json';
 import { schema, normalize } from 'normalizr';
 
