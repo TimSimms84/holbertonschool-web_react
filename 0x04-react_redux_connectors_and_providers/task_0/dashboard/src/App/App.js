@@ -10,6 +10,9 @@ import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
 import { getLatestNotification } from '../utils/utils';
 import AppContext from './AppContext';
+import { connect } from 'react-redux';
+import { uiReducer } from '../reducers/uiReducer';
+
 
 const listCourses = [
   { id: '1', name: 'ES6', credit: 60 },
@@ -17,7 +20,7 @@ const listCourses = [
   { id: '3', name: 'React', credit: 40 },
 ];
 
-export default class App extends React.Component {
+export class App extends React.Component {
   static contextType = AppContext;
 
   constructor(props) {
@@ -140,6 +143,15 @@ export default class App extends React.Component {
     );
   }
 }
+
+export function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.uiReducer.get('isUserLoggedIn'),
+  };
+}
+
+
+export const ConnectedApp = connect(mapStateToProps)(App);
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,

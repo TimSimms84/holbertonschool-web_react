@@ -42,7 +42,8 @@
 		"normalizr": "^3.6.1",
 		"prop-types": "^15.8.1",
 		"react": "^16.13.0",
-		"react-dom": "^16.13.0"
+		"react-dom": "^16.13.0",
+		"react-redux": "^8.0.5"
 	},
 	"jest": {
 		"moduleNameMapper": {
