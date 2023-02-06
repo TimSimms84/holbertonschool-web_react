@@ -1,5 +1,5 @@
 import { StyleSheetTestUtils } from 'aphrodite';
-import uiReducer from './uiReducer';
+import { uiReducer } from './uiReducer';
 import { DISPLAY_NOTIFICATION_DRAWER } from '../actions/uiActionTypes';
 import { initialState } from './uiReducer';
 
