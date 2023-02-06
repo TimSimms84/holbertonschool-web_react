@@ -1,8 +1,9 @@
 import React from 'react';
-import App from './App';
+import { App, mapStateToProps } from './App';
 import { mount } from 'enzyme';
 import { assert } from 'chai';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { fromJS } from 'immutable';
 
 global.console.log = jest.fn()
 
@@ -129,4 +130,28 @@ describe('Logged in App Renders', () => {
   it('NOT the Login', () => {
     assert.equal(login.length, 0);
   });
+});
+
+describe('mapStateToProps', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
+  it('returns the right state', () => {
+    const state = fromJS({
+      isUserLoggedIn: true,
+    });
+    const returnProp = {
+      isLoggedIn: true,
+    }
+    const props = mapStateToProps(state);
+    assert.deepEqual(props, returnProp);
+  });
+
+
 });
